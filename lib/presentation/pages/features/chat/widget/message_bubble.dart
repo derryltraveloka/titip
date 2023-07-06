@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:titip_itinerary_planner/presentation/utils/constants.dart';
 import 'package:titip_itinerary_planner/presentation/utils/custom_color.dart';
 
 class ChatBubble extends StatelessWidget {
-
-  static const senderBubbleColor = Colors.white60;
-  static const systemBubbleColor = travelokaBlue;
-  static const senderTextColor = Colors.black;
-  static const systemTextColor = Colors.white;
 
   const ChatBubble({
     Key? key,
@@ -17,18 +11,16 @@ class ChatBubble extends StatelessWidget {
   final String message;
   final bool isSender;
 
-  const ChatBubble.welcome({super.key}): message = welcomeMessage, isSender = false;
-
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment:
-      isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+          isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         // Text("timestamp"),
         Container(
-          constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width*0.60),
+          constraints: BoxConstraints(maxWidth: 200),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: isSender ? senderBubbleColor : systemBubbleColor,
@@ -41,11 +33,11 @@ class ChatBubble extends StatelessWidget {
               ),
             ],
           ),
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment:
-            isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
               if (message.isNotEmpty)
                 Text(

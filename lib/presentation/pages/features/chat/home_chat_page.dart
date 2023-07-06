@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:titip_itinerary_planner/presentation/pages/features/chat/widget/chat_field.dart';
 import 'package:titip_itinerary_planner/presentation/pages/features/chat/widget/input_message_bar.dart';
 import 'package:titip_itinerary_planner/presentation/utils/custom_color.dart';
 
@@ -10,9 +11,9 @@ class HomeChatPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: travelokaBlue,
-        leading: SizedBox.shrink(),
+        leading: const SizedBox.shrink(),
         leadingWidth: 10,
-        title: Column(
+        title: const Column(
           children: [
             Text(
               "Traveloka",
@@ -30,7 +31,7 @@ class HomeChatPage extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 "Clear Chat",
                 style: TextStyle(color: Colors.white),
               ))
@@ -39,7 +40,7 @@ class HomeChatPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Container(),
+            child: ChatField(),
           ),
           InputMessageBar()
         ],
