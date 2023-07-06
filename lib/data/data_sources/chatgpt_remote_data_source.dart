@@ -1,4 +1,4 @@
-// send ChatGptRequest (message + chat history) and return ChatGptResponse
+// send ChatGptRequest (message + chat.dart history) and return ChatGptResponse
 
 import 'package:titip_itinerary_planner/data/models/chat_gpt_chat_completion_request.dart';
 import 'package:titip_itinerary_planner/data/models/chat_gpt_chat_completion_response.dart';
