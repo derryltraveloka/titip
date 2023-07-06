@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:titip_itinerary_planner/presentation/utils/constants.dart';
 import 'package:titip_itinerary_planner/presentation/utils/custom_color.dart';
 
 class PromptInputForm extends StatefulWidget {
@@ -11,10 +12,27 @@ class PromptInputForm extends StatefulWidget {
 }
 
 class _PromptInputFormState extends State<PromptInputForm> {
-
+  final _destinationController = TextEditingController();
+  final _travellerController = TextEditingController();
+  final _otherInformationController = TextEditingController();
 
   DateTimeRange? selectedDateTimeRange;
   int duration = 7;
+
+  String convertToPromptMessage() {
+    return "$firstChatHeader ${_destinationController.text} ${selectedDateTimeRange == null ? "" : "from ${DateFormat('d MMMM yyyy').format(selectedDateTimeRange!.start)} to ${DateFormat('d MMMM yyyy').format(selectedDateTimeRange!.end)} for ${duration} days"}";
+  }
+
+  void submit() {
+    print(convertToPromptMessage());
+  }
+
+  @override
+  void dispose() {
+    _destinationController.dispose();
+    _travellerController.dispose();
+    _otherInformationController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +51,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Hi Titip :), please help me create itinerary for my trip to:"),
+          Text(firstChatHeader),
           SizedBox(height: 8),
           Text(
             "Destination",
@@ -41,6 +59,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
           ),
           SizedBox(height: 4),
           TextFormField(
+            controller: _destinationController,
             style: textFieldTextStyle,
             decoration: InputDecoration(
               isDense: true,
@@ -87,7 +106,9 @@ class _PromptInputFormState extends State<PromptInputForm> {
                     ? "Click to pick date"
                     : "${DateFormat('d MMM yyyy').format(selectedDateTimeRange!.start)} - ${DateFormat('d MMM yyyy').format(selectedDateTimeRange!.end)}",
                 border: InputBorder.none,
-                hintStyle: fieldHintStyle,
+                hintStyle: selectedDateTimeRange == null
+                    ? fieldHintStyle
+                    : textFieldTextStyle?.copyWith(fontSize: 13),
                 fillColor: Colors.white,
                 filled: true,
               ),
@@ -135,6 +156,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
           ),
           SizedBox(height: 4),
           TextFormField(
+            controller: _travellerController,
             style: textFieldTextStyle,
             decoration: InputDecoration(
               isDense: true,
@@ -160,6 +182,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
           ),
           SizedBox(height: 4),
           TextFormField(
+            controller: _otherInformationController,
             style: textFieldTextStyle,
             maxLines: 3,
             decoration: InputDecoration(
@@ -178,7 +201,9 @@ class _PromptInputFormState extends State<PromptInputForm> {
             children: [
               FilledButton(
                 style: FilledButton.styleFrom(backgroundColor: travelokaBlue),
-                onPressed: () {},
+                onPressed: _destinationController.text.isNotEmpty
+                    ? () => submit()
+                    : null,
                 child: Text(
                   "SUBMIT",
                   style: TextStyle(fontWeight: FontWeight.bold),
