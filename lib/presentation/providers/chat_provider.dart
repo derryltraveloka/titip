@@ -14,6 +14,12 @@ class ChatProvider with ChangeNotifier {
 
   static const chatHistoryRequestLimit = 10;
 
+  void clearChat() {
+    rawChats = [];
+    processedChats = [];
+    notifyListeners();
+  }
+
   Future<ProcessedMessage?> getChatCompletions(String newMessage) async {
     try {
       final newUserRawMessage = Message(role: "user", content: newMessage);

@@ -11,6 +11,8 @@ class PromptInputForm extends StatefulWidget {
 }
 
 class _PromptInputFormState extends State<PromptInputForm> {
+
+
   DateTimeRange? selectedDateTimeRange;
   int duration = 7;
 
@@ -136,7 +138,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
             style: textFieldTextStyle,
             decoration: InputDecoration(
               isDense: true,
-              hintText: "Country, Region, Cities, etc.",
+              hintText: "e.g. I'm travelling solo",
               border: InputBorder.none,
               hintStyle: fieldHintStyle,
               fillColor: Colors.white,
@@ -175,11 +177,13 @@ class _PromptInputFormState extends State<PromptInputForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FilledButton(
-                  onPressed: () {},
-                  child: Text(
-                    "SUBMIT",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
+                style: FilledButton.styleFrom(backgroundColor: travelokaBlue),
+                onPressed: () {},
+                child: Text(
+                  "SUBMIT",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
             ],
           )
         ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:titip_itinerary_planner/presentation/pages/features/chat/widget/chat_field.dart';
 import 'package:titip_itinerary_planner/presentation/pages/features/chat/widget/input_message_bar.dart';
+import 'package:titip_itinerary_planner/presentation/providers/chat_provider.dart';
 import 'package:titip_itinerary_planner/presentation/utils/custom_color.dart';
 
 class HomeChatPage extends StatelessWidget {
@@ -30,7 +32,8 @@ class HomeChatPage extends StatelessWidget {
         ),
         actions: [
           TextButton(
-              onPressed: () {},
+              onPressed: () =>
+                  Provider.of<ChatProvider>(context, listen: false).clearChat(),
               child: const Text(
                 "Clear Chat",
                 style: TextStyle(color: Colors.white),
