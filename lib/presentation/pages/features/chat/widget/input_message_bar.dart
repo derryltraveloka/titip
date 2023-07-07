@@ -18,8 +18,28 @@ class _InputMessageBarState extends State<InputMessageBar> {
       final String message = _chatController.text;
       _chatController.clear();
       FocusScope.of(context).unfocus();
-      await Provider.of<ChatProvider>(context, listen: false)
-          .getChatCompletions(message);
+      try {
+        await Provider.of<ChatProvider>(context, listen: false)
+            .getChatCompletions(message);
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Something went wrong"),
+              content: Text("Please try again."),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Close'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 

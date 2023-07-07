@@ -25,7 +25,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
     return "$firstChatHeader ${_destinationController.text} ${selectedDateTimeRange == null ? "" : "from ${DateFormat('d MMMM yyyy').format(selectedDateTimeRange!.start)} to ${DateFormat('d MMMM yyyy').format(selectedDateTimeRange!.end)} "}for ${duration} days. ${_travellerController.text} ${_otherInformationController.text}";
   }
 
-  void submit(BuildContext context) async {
+  Future<void> submit(BuildContext context) async {
     if (_destinationController.text.isEmpty) {
       final snackBar = SnackBar(
         content: Text('Please input your destination... :)'),
@@ -45,8 +45,28 @@ class _PromptInputFormState extends State<PromptInputForm> {
 
     if (message.isNotEmpty) {
       FocusScope.of(context).unfocus();
-      await Provider.of<ChatProvider>(context, listen: false)
-          .getChatCompletions(message);
+      try {
+        await Provider.of<ChatProvider>(context, listen: false)
+            .getChatCompletions(message);
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Something went wrong"),
+              content: Text("Please try again."),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Close'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 
