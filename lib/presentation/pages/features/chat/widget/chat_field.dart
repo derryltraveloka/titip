@@ -10,8 +10,8 @@ import 'package:titip_itinerary_planner/presentation/providers/chat_provider.dar
 import 'package:titip_itinerary_planner/presentation/utils/provider_state.dart';
 
 final initialBubbles = [
-  ChatBubble.welcome(),
-  InitialFormChatBubble(),
+  const ChatBubble.welcome(),
+  const InitialFormChatBubble(),
 ];
 
 class ChatField extends StatefulWidget {
@@ -58,10 +58,10 @@ class _ChatFieldState extends State<ChatField> {
             itemCount: count,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return ChatBubble.welcome();
+                return const ChatBubble.welcome();
               }
               if (isLoading && index == count - 1) {
-                return LoadingChatBubble();
+                return const LoadingChatBubble();
               }
               index -= 1;
 

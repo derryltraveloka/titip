@@ -24,13 +24,13 @@ class InitialFormChatBubble extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 1,
                 blurRadius: 1,
-                offset: Offset(1, 2), // changes position of shadow
+                offset: const Offset(1, 2), // changes position of shadow
               ),
             ],
           ),
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: PromptInputForm(),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: const PromptInputForm(),
         ),
       ],
     );

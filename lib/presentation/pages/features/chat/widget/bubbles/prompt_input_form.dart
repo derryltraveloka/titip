@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -22,13 +21,13 @@ class _PromptInputFormState extends State<PromptInputForm> {
   int duration = 7;
 
   String convertFormToPrompt() {
-    return "$firstChatHeader ${_destinationController.text} ${selectedDateTimeRange == null ? "" : "from ${DateFormat('d MMMM yyyy').format(selectedDateTimeRange!.start)} to ${DateFormat('d MMMM yyyy').format(selectedDateTimeRange!.end)} "}for ${duration} days. ${_travellerController.text} ${_otherInformationController.text}";
+    return "$firstChatHeader ${_destinationController.text} ${selectedDateTimeRange == null ? "" : "from ${DateFormat('d MMMM yyyy').format(selectedDateTimeRange!.start)} to ${DateFormat('d MMMM yyyy').format(selectedDateTimeRange!.end)} "}for $duration days. ${_travellerController.text} ${_otherInformationController.text}";
   }
 
   Future<void> submit(BuildContext context) async {
     if (_destinationController.text.isEmpty) {
       final snackBar = SnackBar(
-        content: Text('Please input your destination... :)'),
+        content: const Text('Please input your destination... :)'),
         behavior: SnackBarBehavior.floating,
         action: SnackBarAction(
           label: "close",
@@ -53,8 +52,8 @@ class _PromptInputFormState extends State<PromptInputForm> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Something went wrong"),
-              content: Text("Please try again."),
+              title: const Text("Something went wrong"),
+              content: const Text("Please try again."),
               actions: <Widget>[
                 TextButton(
                   child: const Text('Close'),
@@ -94,13 +93,13 @@ class _PromptInputFormState extends State<PromptInputForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(firstChatHeader),
-        SizedBox(height: 8),
+        const Text(firstChatHeader),
+        const SizedBox(height: 8),
         Text(
           "Destination",
           style: fieldTitleStyle,
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         TextFormField(
           controller: _destinationController,
           style: textFieldTextStyle,
@@ -113,7 +112,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
             filled: true,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           children: [
             Text(
@@ -126,7 +125,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
             ),
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         GestureDetector(
           onTap: () async {
             final dateRange = await showDateRangePicker(
@@ -143,7 +142,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
           child: TextFormField(
             style: textFieldTextStyle,
             decoration: InputDecoration(
-              icon: Icon(Icons.calendar_month),
+              icon: const Icon(Icons.calendar_month),
               isDense: true,
               hintText: selectedDateTimeRange == null
                   ? "Click to pick date"
@@ -158,12 +157,12 @@ class _PromptInputFormState extends State<PromptInputForm> {
             enabled: false,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           "Duration",
           style: fieldTitleStyle,
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -171,18 +170,18 @@ class _PromptInputFormState extends State<PromptInputForm> {
               onPressed: selectedDateTimeRange != null || duration <= 1
                   ? null
                   : () => setState(() => duration -= 1),
-              icon: Icon(Icons.remove),
+              icon: const Icon(Icons.remove),
             ),
             Text(
-              "${duration}",
+              "$duration",
               style: Theme.of(context).textTheme.labelLarge,
             ),
             IconButton(
                 onPressed: selectedDateTimeRange != null
                     ? null
                     : () => setState(() => duration += 1),
-                icon: Icon(Icons.add)),
-            Text(" days")
+                icon: const Icon(Icons.add)),
+            const Text(" days")
           ],
         ),
         Row(
@@ -197,7 +196,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
             ),
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         TextFormField(
           controller: _travellerController,
           style: textFieldTextStyle,
@@ -210,7 +209,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
             filled: true,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Wrap(
           children: [
             Text(
@@ -223,7 +222,7 @@ class _PromptInputFormState extends State<PromptInputForm> {
             ),
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         TextFormField(
           controller: _otherInformationController,
           style: textFieldTextStyle,
@@ -238,14 +237,14 @@ class _PromptInputFormState extends State<PromptInputForm> {
             filled: true,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FilledButton(
               style: FilledButton.styleFrom(backgroundColor: travelokaBlue),
               onPressed: () => submit(context),
-              child: Text(
+              child: const Text(
                 "SUBMIT",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),

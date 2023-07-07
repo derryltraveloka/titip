@@ -27,14 +27,14 @@ class AssistantChatBubble extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 1,
                 blurRadius: 1,
-                offset: Offset(1, 2), // changes position of shadow
+                offset: const Offset(1, 2), // changes position of shadow
               ),
             ],
           ),
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Builder(builder: (context) {
-            if (message.content == null) return SizedBox.shrink();
+            if (message.content == null) return const SizedBox.shrink();
             final content = message.content!;
 
             return Column(

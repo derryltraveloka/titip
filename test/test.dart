@@ -5,17 +5,13 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:titip_itinerary_planner/data/data_sources/chatgpt_remote_data_source.dart';
 import 'package:titip_itinerary_planner/data/models/chat_gpt_chat_completion_request.dart';
 import 'package:titip_itinerary_planner/data/models/chat_gpt_chat_completion_response.dart';
 
-import 'package:titip_itinerary_planner/main.dart';
 
-import 'package:http/http.dart' as http;
 
 Future<void> main() async {
   // var headers = {

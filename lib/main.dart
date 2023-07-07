@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: travelokaBlue),
           useMaterial3: true,
         ),
-        home: HomeChatPage(),
+        home: const HomeChatPage(),
       ),
     );
   }

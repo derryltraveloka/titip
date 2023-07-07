@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:titip_itinerary_planner/data/data_sources/chatgpt_remote_data_source.dart';
 import 'package:titip_itinerary_planner/data/models/chat_gpt_chat_completion_request.dart';
 import 'package:titip_itinerary_planner/data/models/chat_gpt_chat_completion_response.dart';
 import 'package:titip_itinerary_planner/domain/entities/processed_message.dart';
@@ -24,7 +25,7 @@ class ChatProvider with ChangeNotifier {
   }
 
   Future<ProcessedMessage?> getChatCompletions(String newMessage,
-      {bool mockError = false}) async {
+      {bool mockError = false, bool mockErrorFunction = false}) async {
     try {
       getChatCompletionsState = ProviderState.loading;
 
@@ -33,6 +34,7 @@ class ChatProvider with ChangeNotifier {
         role: "user",
         content: ChatGptChatCompletionResponse(message: newMessage),
       );
+      print("test3");
       rawChats?.add(newUserRawMessage);
       processedChats?.add(newUserProcessedMessage);
       notifyListeners();
@@ -41,16 +43,23 @@ class ChatProvider with ChangeNotifier {
 
       // call remote data source with latest 10 raw chat
       final request = ChatGptChatCompletionRequest(messages: rawChats);
-      final response = await mockGetChatCompletions(request);
+      ChatGptChatCompletionResponse? response;
+      if (mockErrorFunction) {
+        response = await mockGetChatCompletions(request);
+      } else {
+        response =
+            await ChatGptRemoteDataSourceImpl().getChatCompletions(request);
+      }
 
       if (response != null) {
-        final newAssistantRawMessage = Message(
-          role: "assistant",
-          content: response.toRawJson(),
-        );
         final newAssistantProcessedMessage = ProcessedMessage(
           role: "assistant",
           content: response,
+        );
+        final newAssistantRawMessage = Message(
+          role: "assistant",
+          content:
+              "${response.message} ${response.recommendedHotels.toString()}",
         );
 
         rawChats?.add(newAssistantRawMessage);

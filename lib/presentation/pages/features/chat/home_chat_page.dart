@@ -40,7 +40,7 @@ class HomeChatPage extends StatelessWidget {
               ))
         ],
       ),
-      body: Column(
+      body: const Column(
         children: [
           Expanded(
             child: ChatField(),

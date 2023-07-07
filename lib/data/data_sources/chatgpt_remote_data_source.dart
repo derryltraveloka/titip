@@ -14,45 +14,38 @@ abstract class ChatGptRemoteDataSource {
       ChatGptChatCompletionRequest chatGptChatCompletionRequest);
 }
 
-class ChatGptRemoteDataSourceImpl implements ChatGptRemoteDataSource{
-
-
+class ChatGptRemoteDataSourceImpl implements ChatGptRemoteDataSource {
   ChatGptRemoteDataSourceImpl();
 
   @override
-  Future<ChatGptChatCompletionResponse> getChatCompletions(ChatGptChatCompletionRequest chatGptChatCompletionRequest) async {
-    // TODO: implement getChatCompletions
-    // String str = ";
-
-    // ChatGptChatCompletionRequest(
-    //   messages: Message.fromRawJson(str)
-    // )
-
+  Future<ChatGptChatCompletionResponse> getChatCompletions(
+      ChatGptChatCompletionRequest chatGptChatCompletionRequest) async {
     final body = chatGptChatCompletionRequest.toRawJson();
-    try{
+    print(body);
+    try {
+      final url = Uri.parse(BASE_URL).replace(path: '/chat/completions');
+      print(url);
 
-      final url = Uri.parse(BASE_URL).replace(path: '/mock/chat/completions');
+      print("test1");
 
       final response = await http.post(
         url,
         headers: defaultHeader,
-        // ..addEntries({"Authorization": "Bearer $token"}.entries),
         body: body,
       );
 
+      print("test2");
+
       final responseBody = json.decode(response.body);
+
+      print(responseBody);
 
       if (response.statusCode ~/ 100 == 2) {
         return ChatGptChatCompletionResponse.fromJson(responseBody["data"]);
       }
-
+      throw Exception();
     } on Exception {
       rethrow;
     }
-
-
-
-    throw UnimplementedError();
   }
-
 }

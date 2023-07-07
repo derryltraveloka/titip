@@ -7,8 +7,10 @@ class ProcessedHotel {
   final double? userRating;
   final int? numReviews;
   final double? rate;
+  final String? description;
 
   const ProcessedHotel({
+    this.description,
     this.hotelName,
     this.regionName,
     this.imageUrl,
@@ -31,4 +33,15 @@ ProcessedHotel mockProcessedHotel = const ProcessedHotel(
   regionName: "Cihampelas, Bandung",
   targetUrl:
       "https://www.traveloka.com/en-id/hotel/indonesia/grand-tjokro-premiere-bandung-3000010008390?spec=08-07-2023.09-07-2023.1.1.HOTEL.3000010008390.Grand%20Tjokro%20Premiere%20Bandung.1",
+  description:
+      "Padma Hotel Bandung is located in area / city Ciumbuleuit.\n\n\n24-hours front desk is available to serve you, from check-in to check-out, or any assistance you need. Should you desire more, do not hesitate to ask the front desk, we are always ready to accommodate you.\nWiFi is available within public areas of the property to help you to stay connected with family and friends.",
 );
+
+// Future<ProcessedHotel> getHotel(String name){
+//
+// }
+
+Future<ProcessedHotel> mockProcessedHotelFuture() async {
+  await Future.delayed(const Duration(seconds: 5));
+  return mockProcessedHotel;
+}

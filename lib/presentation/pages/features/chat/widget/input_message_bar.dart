@@ -26,8 +26,8 @@ class _InputMessageBarState extends State<InputMessageBar> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Something went wrong"),
-              content: Text("Please try again."),
+              title: const Text("Something went wrong"),
+              content: const Text("Please try again."),
               actions: <Widget>[
                 TextButton(
                   child: const Text('Close'),
@@ -47,8 +47,9 @@ class _InputMessageBarState extends State<InputMessageBar> {
   Widget build(BuildContext context) {
     return Consumer<ChatProvider>(
       builder: (context, chatProvider, child) {
-        if (chatProvider.rawChats == null || chatProvider.rawChats!.isEmpty)
-          return SizedBox.shrink();
+        if (chatProvider.rawChats == null || chatProvider.rawChats!.isEmpty) {
+          return const SizedBox.shrink();
+        }
 
         return Container(
           color: travelokaBlue,
@@ -56,7 +57,7 @@ class _InputMessageBarState extends State<InputMessageBar> {
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     color: Colors.white,
