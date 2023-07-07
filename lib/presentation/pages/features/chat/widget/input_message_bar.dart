@@ -27,7 +27,7 @@ class _InputMessageBarState extends State<InputMessageBar> {
   Widget build(BuildContext context) {
     return Consumer<ChatProvider>(
       builder: (context, chatProvider, child) {
-        if (chatProvider.rawChats == null || chatProvider!.rawChats!.isEmpty)
+        if (chatProvider.rawChats == null || chatProvider.rawChats!.isEmpty)
           return SizedBox.shrink();
 
         return Container(

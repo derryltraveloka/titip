@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:titip_itinerary_planner/presentation/pages/features/chat/widget/prompt_input_form.dart';
+import 'package:titip_itinerary_planner/presentation/pages/features/chat/widget/bubbles/prompt_input_form.dart';
 import 'package:titip_itinerary_planner/presentation/utils/custom_color.dart';
 
 class InitialFormChatBubble extends StatelessWidget {
